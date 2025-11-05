@@ -65,11 +65,12 @@ class MainActivity : AppCompatActivity() {
                         val characters = response.body()?.results ?: emptyList()
                         if (characters.isNotEmpty()) {
                             tvNoResults.visibility = View.GONE
-                            characterAdapter = CharacterAdapter(characters) { personaje ->
+                            characterAdapter = CharacterAdapter(this@MainActivity, characters) { personaje ->
                                 val intent = Intent(this@MainActivity, DetailActivity::class.java)
                                 intent.putExtra("characterId", personaje.id)
                                 startActivity(intent)
                             }
+
                             recyclerView.adapter = characterAdapter
                         } else {
                             // No characters found for the query
