@@ -50,6 +50,19 @@
                 android:layout_gravity="center_vertical"/>
         </LinearLayout>
 
+        <!-- Favorite image button -->
+        <ImageButton
+            android:id="@+id/btnVerFavoritos"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="ver_favoritos"
+            android:src="@drawable/fav"
+            android:scaleType="centerInside"/>
+
         <!-- Message displayed if no characters are found -->
         <TextView
             android:id="@+id/tvNoResults"

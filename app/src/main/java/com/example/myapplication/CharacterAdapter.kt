@@ -40,11 +40,11 @@ class CharacterAdapter(
         holder.tvSpecies.text = character.species
         Glide.with(holder.itemView).load(character.image).into(holder.ivCharacter)
 
-        // Actualizar ícono si ya está en favoritos
+        // Update favorite icon
         val favorito = db.esFavorito(character.id)
         holder.ivFav.setImageResource(if (favorito) R.drawable.fav_lleno else R.drawable.fav)
 
-        // Toggle favorito
+        // Toggle favorite
         holder.ivFav.setOnClickListener {
             if (db.esFavorito(character.id)) {
                 db.eliminarFavorito(character.id)
@@ -55,7 +55,7 @@ class CharacterAdapter(
             }
         }
 
-        // Click general del personaje
+        // Click general character
         holder.itemView.setOnClickListener { onClick(character) }
     }
 }

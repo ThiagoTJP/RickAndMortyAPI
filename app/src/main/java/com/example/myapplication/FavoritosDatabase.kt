@@ -7,10 +7,12 @@ import android.database.sqlite.SQLiteOpenHelper
 
 class FavoritosDatabase(context: Context) : SQLiteOpenHelper(
     context,
-    "favoritos.db",
+    "favoritos.db", // Database name
     null,
     1
 ) {
+
+    // Called only once when the database is created for the first time
     override fun onCreate(db: SQLiteDatabase?) {
         val crearTabla = """
             CREATE TABLE favoritos(
@@ -20,14 +22,16 @@ class FavoritosDatabase(context: Context) : SQLiteOpenHelper(
                 image TEXT
             )
         """
-        db?.execSQL(crearTabla)
+        db?.execSQL(crearTabla) // execute SQL command to create the table
     }
-
+    // Called automatically when the database version changes
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        db?.execSQL("DROP TABLE IF EXISTS favoritos")
-        onCreate(db)
+        db?.execSQL("DROP TABLE IF EXISTS favoritos") // delete the old table
+        onCreate(db) // recreate the table
     }
 
+
+    // Adds a new favorite character (avoids duplicates using CONFLICT_IGNORE)
     fun agregarFavorito(id: Int, name: String, species: String, image: String): Boolean {
         val db = writableDatabase
         val valores = ContentValues().apply {
@@ -41,19 +45,22 @@ class FavoritosDatabase(context: Context) : SQLiteOpenHelper(
             "favoritos",
             null,
             valores,
-            SQLiteDatabase.CONFLICT_IGNORE // evita duplicados
+            SQLiteDatabase.CONFLICT_IGNORE // prevents duplicate entries
         )
         db.close()
-        return resultado != -1L
+        return resultado != -1L // returns true if the insertion succeeded
     }
 
+
+    // Deletes a character from favorites by its ID
     fun eliminarFavorito(id: Int): Boolean {
         val db = writableDatabase
         val filas = db.delete("favoritos", "id = ?", arrayOf(id.toString()))
         db.close()
-        return filas > 0
+        return filas > 0 // returns true if at least one row was deleted
     }
 
+    // Checks if a character is already in favorites
     fun esFavorito(id: Int): Boolean {
         val db = readableDatabase
         val cursor = db.rawQuery("SELECT * FROM favoritos WHERE id = ?", arrayOf(id.toString()))
@@ -63,6 +70,8 @@ class FavoritosDatabase(context: Context) : SQLiteOpenHelper(
         return existe
     }
 
+
+    // Returns a list of all favorite characters as a list of maps
     fun obtenerFavoritos(): List<Map<String, String>> {
         val favoritos = mutableListOf<Map<String, String>>()
         val db = readableDatabase

@@ -35,15 +35,33 @@
                 android:scaleType="centerCrop"
                 android:contentDescription="Imagen del personaje"/>
 
-            <!-- Character name -->
-            <TextView
-                android:id="@+id/tvNameDetail"
+            <!-- Character name + Favorite icon in one row -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:layout_marginTop="12dp"/>
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="12dp">
+
+                <TextView
+                    android:id="@+id/tvNameDetail"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"/>
+
+                <ImageButton
+                    android:id="@+id/btnFavDetail"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="Agregar a favoritos"
+                    android:src="@drawable/fav"
+                    android:scaleType="centerInside"
+                    android:layout_marginStart="8dp"/>
+            </LinearLayout>
 
             <!-- Character status -->
             <TextView
