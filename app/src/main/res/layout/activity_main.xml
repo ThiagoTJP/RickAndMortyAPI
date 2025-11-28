@@ -68,7 +68,7 @@
             android:id="@+id/tvNoResults"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="¡Oops! No se encontraron personajes… \nNi siquiera \nMr. Meeseeks"
+            android:text="Oops! No characters were found… \nNot even \nMr. Meeseeks"
             android:textSize="54sp"
             android:textStyle="bold"
             android:gravity="center"
